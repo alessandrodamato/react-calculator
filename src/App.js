@@ -1,24 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Components/Header';
+import Counter from './Components/Counter';
+import Home from './Components/Home';
+import Calculator from './Components/Calculator';
+import Error404 from './Components/Error404';
+// importiamo questi due elementi per il routing 
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      {/* con routes si stabilisce dove iniziano e finiscono le rotte, mentre con route configuriamo la singola rotta con path ed element */}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/calcolatrice' element={<Calculator />} />
+        <Route path='/contatore' element={<Counter />} />
+        {/* con * tutte le rotte indefinite reindirizzeranno al componente Error404 personalizzato */}
+        <Route path='*' element={<Error404 />} />
+      </Routes>
+    </>
   );
 }
 

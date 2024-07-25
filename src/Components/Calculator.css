@@ -1,0 +1,38 @@
+.calculator{
+  width: 320px;
+  margin: 0 auto;
+}
+
+#answer {
+  width: 100%;
+  padding: 10px;
+  font-size: 35px;
+  text-align: right;
+  background-color: #e3f2fd;
+  border: 3px solid #333;
+}
+
+#answer::placeholder{
+  color: black;
+}
+
+.button{
+  width: calc(100% / 4);
+  height: 80px;
+  font-size: 30px;
+  border: 1px solid black;
+  background-color: #333;
+  color: white;
+}
+
+.button0,
+.button:nth-last-child(2),
+.button:nth-last-child(1) {
+  width: 50%;
+}
+
+@media screen and (max-width: 576px) {
+  .calculator{
+    width: 50%;
+  }
+}
