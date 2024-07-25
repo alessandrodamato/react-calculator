@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# React First Project  
+
+My first react project, which is a playground for testing and learning this framework.  
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
