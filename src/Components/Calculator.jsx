@@ -26,6 +26,7 @@ function Calculator() {
   const [isCalculated, updateisCalculated] = useState(false);
 
   const btnClick = (e, type) => {
+    animateButton(e);
     if(isCalculated && type === 'number'){
       clear();
       setResult(e.target.value);
@@ -38,6 +39,11 @@ function Calculator() {
   const clear = () => {
     updateisCalculated(false);
     setResult('');
+  }
+
+  const undo = () => {
+    updateisCalculated(false);
+    setResult(result.slice(0, -1));
   }
 
   const calculate = () => {
@@ -53,8 +59,15 @@ function Calculator() {
       setResult('Formula non valida');
       setTimeout(() => {
         clear();
-      }, 1000);
+      }, 1500);
     }
+  }
+
+  const animateButton = (e) => {
+    e.target.classList.add('clicked');
+    setTimeout(() => {
+      e.target.classList.remove('clicked');
+    }, 100);
   }
 
   return (
@@ -63,11 +76,12 @@ function Calculator() {
       <div className="calculator d-flex flex-wrap">
 
         {/* risultato */}
-        <input type="text" placeholder="0" id="answer" value={result} readOnly/>
+        <input className={result === 'Formula non valida' ? 'text-center fs-4' : 'text-end'} type="text" placeholder="0" id="answer" value={result}/>
 
         {/* bottoni numeri e operatori */}
         {buttons.map((button, index) => (
           <input
+            disabled={result === 'Formula non valida'}
             key={index}
             type="button"
             value={button.value}
@@ -76,8 +90,9 @@ function Calculator() {
           />
         ))}
         
-        <input type="button" value="C" className="button" onClick={clear} />
-        <input type="button" value="=" className="button" onClick={calculate} />
+        <input type="button" value='<-' className="button" onClick={() => {animateButton(event); undo();}} disabled={result === 'Formula non valida'} />
+        <input type="button" value="C" className="button" onClick={() => {animateButton(event); clear();}} />
+        <input type="button" value="=" className="button" onClick={() => {animateButton(event); calculate();}} />
 
       </div>
     </>
