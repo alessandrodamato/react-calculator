@@ -1,0 +1,17 @@
+.logo{
+  width: 30px;
+  aspect-ratio: 1;
+}
+
+.ad-link{
+  font-size: .9rem;
+}
+
+@media screen and (min-width: 576px) {
+  .ad-link{
+    font-size: 1.25rem;
+  }
+  .logo{
+    width: 60px;
+  }
+}

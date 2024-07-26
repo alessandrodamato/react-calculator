@@ -71,7 +71,7 @@ function Calculator() {
             key={index}
             type="button"
             value={button.value}
-            className={`button ${button.value == '0' ? 'button0' : ''}`}
+            className={`button ${button.value === '0' ? 'button0' : ''}`}
             onClick={(e) => {btnClick(e, button.type)}}
           />
         ))}

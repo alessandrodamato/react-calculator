@@ -40,13 +40,29 @@ function Pokemon() {
 
   return (
     <div className="container text-center">
-      {pokemon.name && <h1 className="my-5 text-capitalize">Pokemon: {pokemon.name}</h1>}
-      {!pokemon.name && <div className="loader mx-auto my-5"></div>}
-      <select name="pokemon" className="text-capitalize form-select w-25 mx-auto" onChange={(e) => { setvalue(e.target.value) }}>
+
+      <h1 className="mt-5 mb-3">Seleziona un pokemon:</h1>
+
+      <select name="pokemon" className="text-capitalize form-select w-25 mx-auto mb-3" onChange={(e) => { setvalue(e.target.value) }}>
         {pokemons.map((item, index) => (
           <option key={index} value={index + 1}>{item.name}</option>
         ))}
       </select>
+
+      {!pokemon.name && <div className="loader mx-auto my-5"></div>}
+
+      {pokemon.name &&
+        <>
+          <h3 className="text-capitalize">Nome: {pokemon.name}</h3>
+
+          <h3 className="text-capitalize">Abilities:
+            {pokemon.abilities.map((ability, index) => (
+              <span key={index}> {ability.ability.name}{pokemon.abilities.length - 1 !== index && <span> |</span>}</span>
+            ))}
+          </h3>
+        </>
+      }
+
     </div>
   );
 }
