@@ -3,6 +3,7 @@ import Header from './Components/Header';
 import Counter from './Components/Counter';
 import Home from './Components/Home';
 import Calculator from './Components/Calculator';
+import Pokemon from './Components/Pokemon';
 import Error404 from './Components/Error404';
 // importiamo questi due elementi per il routing 
 import { Routes, Route } from 'react-router-dom';
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/calcolatrice' element={<Calculator />} />
         <Route path='/contatore' element={<Counter />} />
+        <Route path='/pokemon' element={<Pokemon />} />
         {/* con * tutte le rotte indefinite reindirizzeranno al componente Error404 personalizzato */}
         <Route path='*' element={<Error404 />} />
       </Routes>
