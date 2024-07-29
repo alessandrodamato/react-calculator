@@ -4,6 +4,7 @@
 }
 
 .ad-link{
+  display: inline-block !important;
   font-size: .9rem;
 }
 
