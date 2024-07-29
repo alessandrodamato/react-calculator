@@ -19,16 +19,16 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item d-none d-sm-inline-block">
-                <Link to="/" className="nav-link ad-link">Home</Link>
+                <Link to="/" className="nav-link gesecreste">Home</Link>
               </li>
               <li className="nav-item">
-                <Link to="/contatore" className="nav-link ad-link">Contatore</Link>
+                <Link to="/contatore" className="nav-link gesecreste">Contatore</Link>
               </li>
               <li className="nav-item">
-                <Link to="/calcolatrice" className="nav-link ad-link">Calcolatrice</Link>
+                <Link to="/calcolatrice" className="nav-link gesecreste">Calcolatrice</Link>
               </li>
               <li className="nav-item">
-                <Link to="/pokemon" className="nav-link ad-link">Pokemon</Link>
+                <Link to="/pokemon" className="nav-link gesecreste">Pokemon</Link>
               </li>
             </ul>
           </div>

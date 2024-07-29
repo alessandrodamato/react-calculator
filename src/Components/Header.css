@@ -3,13 +3,13 @@
   aspect-ratio: 1;
 }
 
-header .ad-link{
+.gesecreste{
   display: inline-block !important;
   font-size: .9rem;
 }
 
 @media screen and (min-width: 576px) {
-  header .ad-link{
+  .gesecreste{
     font-size: 1.25rem;
   }
   .logo{
