@@ -3,13 +3,13 @@
   aspect-ratio: 1;
 }
 
-.ad-link{
+header .ad-link{
   display: inline-block !important;
   font-size: .9rem;
 }
 
 @media screen and (min-width: 576px) {
-  .ad-link{
+  header .ad-link{
     font-size: 1.25rem;
   }
   .logo{
