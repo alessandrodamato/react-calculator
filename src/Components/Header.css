@@ -3,13 +3,12 @@
   aspect-ratio: 1;
 }
 
-.gesecreste{
-  display: inline-block !important;
+.routes{
   font-size: .9rem;
 }
 
 @media screen and (min-width: 576px) {
-  .gesecreste{
+  .routes{
     font-size: 1.25rem;
   }
   .logo{
