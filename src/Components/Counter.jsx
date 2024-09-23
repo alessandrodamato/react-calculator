@@ -13,7 +13,7 @@ function Counter() {
 
   // questo hook parte ad ogni caricamento/aggiornamento del componente
   useEffect(() => {
-    console.log("Componente 'Counter' aggiornato")
+    console.log(currentstate);
   });
   
   // questa funzione richiama le altre al suo interno

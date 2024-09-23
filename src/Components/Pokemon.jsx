@@ -13,11 +13,11 @@ function Pokemon() {
   const [pokemons, setpokemons] = useState([]);
 
   useEffect(() => {
-    getApi();
+    getPokemon();
     getAllPokemons();
   }, [value]);
 
-  function getApi() {
+  function getPokemon() {
     setpokemon({});
     axios.get(apiUrl + value)
       .then(res => {

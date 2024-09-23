@@ -76,7 +76,7 @@ function Calculator() {
       <div className="calculator d-flex flex-wrap">
 
         {/* risultato */}
-        <input className={result === 'Formula non valida' ? 'text-center fs-4' : 'text-end'} type="text" placeholder="0" id="answer" value={result}/>
+        <input className={result === 'Formula non valida' ? 'text-center fs-4' : 'text-end'} type="text" placeholder="0" id="answer" value={result} readOnly/>
 
         {/* bottoni numeri e operatori */}
         {buttons.map((button, index) => (
