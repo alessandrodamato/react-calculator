@@ -23,7 +23,7 @@ function Calculator() {
   ];
 
   const [result, setResult] = useState('');
-  const [isCalculated, updateisCalculated] = useState(false);
+  const [isCalculated, setIsCalculated] = useState(false);
 
   const btnClick = (e, type) => {
     animateButton(e);
@@ -33,21 +33,21 @@ function Calculator() {
     } else {
       setResult(prevResult => prevResult.concat(e.target.value));
     }
-    updateisCalculated(false);
+    setIsCalculated(false);
   };
 
   const clear = () => {
-    updateisCalculated(false);
+    setIsCalculated(false);
     setResult('');
   }
 
   const undo = () => {
-    updateisCalculated(false);
+    setIsCalculated(false);
     setResult(result.slice(0, -1));
   }
 
   const calculate = () => {
-    updateisCalculated(true);
+    setIsCalculated(true);
     if(result === ''){
       return;
     }
@@ -55,7 +55,7 @@ function Calculator() {
       const evalResult = eval(result);
       setResult(evalResult.toString());
     } catch (error) {
-      updateisCalculated(false);
+      setIsCalculated(false);
       setResult('Formula non valida');
       setTimeout(() => {
         clear();
@@ -71,9 +71,7 @@ function Calculator() {
   }
 
   return (
-    <>
-      <h1 className="text-center my-5">Calcolatrice</h1>
-      <div className="calculator d-flex flex-wrap">
+      <div className="calculator d-flex flex-wrap my-5">
 
         {/* risultato */}
         <input className={result === 'Formula non valida' ? 'text-center fs-4' : 'text-end'} type="text" placeholder="0" id="answer" value={result} readOnly/>
@@ -95,7 +93,6 @@ function Calculator() {
         <input type="button" value="=" className="button" onClick={() => {animateButton(event); calculate();}} />
 
       </div>
-    </>
   );
 }
 
