@@ -26,73 +26,103 @@ function Calculator() {
 
   const btnClick = (e, type) => {
     animateButton(e);
-    if(isCalculated && type === 'number'){
+
+    if (isCalculated && type === 'number') {
       clear();
       setResult(e.target.value);
     } else {
-      setResult(prevResult => prevResult.concat(e.target.value));
+      setResult(prev => prev + e.target.value);
     }
+
     setIsCalculated(false);
   };
 
   const clear = () => {
-    setIsCalculated(false);
     setResult('');
-  }
+    setIsCalculated(false);
+  };
 
   const undo = () => {
+    setResult(prev => prev.slice(0, -1));
     setIsCalculated(false);
-    setResult(result.slice(0, -1));
-  }
+  };
 
   const calculate = () => {
     setIsCalculated(true);
-    if(result === ''){
-      return;
-    }
+
+    if (result === '') return;
+
     try {
       const evalResult = eval(result);
       setResult(evalResult.toString());
-    } catch (error) {
+    }
+    catch {
       setIsCalculated(false);
       setResult('Formula non valida');
+
       setTimeout(() => {
         clear();
       }, 1500);
     }
-  }
+  };
 
   const animateButton = (e) => {
     e.target.classList.add('clicked');
+
     setTimeout(() => {
       e.target.classList.remove('clicked');
     }, 100);
-  }
+  };
 
   return (
-      <div className="calculator d-flex flex-wrap my-5">
 
-        {/* risultato */}
-        <input className={result === 'Formula non valida' ? 'text-center fs-4' : 'text-end'} type="text" placeholder="0" id="answer" value={result} readOnly/>
+    <div className="calculator d-flex flex-wrap my-5">
 
-        {/* bottoni numeri e operatori */}
-        {buttons.map((button, index) => (
-          <input
-            disabled={result === 'Formula non valida'}
-            key={index}
-            type="button"
-            value={button.value}
-            className={`button ${button.value === '0' ? 'button0' : ''}`}
-            onClick={(e) => {btnClick(e, button.type)}}
-          />
-        ))}
-        
-        <input type="button" value='<-' className="button" onClick={() => {animateButton(event); undo();}} disabled={result === 'Formula non valida'} />
-        <input type="button" value="C" className="button" onClick={() => {animateButton(event); clear();}} />
-        <input type="button" value="=" className="button" onClick={() => {animateButton(event); calculate();}} />
+      <input
+        id="answer"
+        type="text"
+        placeholder="0"
+        value={result}
+        readOnly
+        className={result === 'Formula non valida' ? 'text-center fs-4' : 'text-end'}
+      />
 
-      </div>
+      {buttons.map((button, index) => (
+        <input
+          key={index}
+          type="button"
+          value={button.value}
+          disabled={result === 'Formula non valida'}
+          className={`button ${button.value === '0' ? 'button0' : ''}`}
+          onClick={(e) => btnClick(e, button.type)}
+        />
+      ))}
+
+      <input
+        type="button"
+        value="<-"
+        className="button"
+        onClick={(e) => { animateButton(e); undo(); }}
+        disabled={result === 'Formula non valida'}
+      />
+
+      <input
+        type="button"
+        value="C"
+        className="button"
+        onClick={(e) => { animateButton(e); clear(); }}
+      />
+
+      <input
+        type="button"
+        value="="
+        className="button equal"
+        onClick={(e) => { animateButton(e); calculate(); }}
+      />
+
+    </div>
+
   );
 }
 
-export default Calculator
+export default Calculator;

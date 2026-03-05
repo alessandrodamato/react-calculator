@@ -1,48 +1,134 @@
-.calculator{
-  width: 320px;
+.calculator {
+  width: 340px;
   margin: 0 auto;
-  border: 1px solid black;
+  padding: 15px;
+  border-radius: 30px;
   background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: env(safe-area-inset-top);
+  padding-top: calc(20px + env(safe-area-inset-top));
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
 }
 
 #answer {
   width: 100%;
-  height: 80px;
+  height: 90px;
   padding: 0 20px;
-  font-size: 35px;
+  font-size: 42px;
   background-color: #e3f2fd;
-  border: 2px solid #333;
+  border-radius: 20px;
+  border: none;
+  text-align: right;
+  margin-bottom: 10px;
 }
 
-#answer::placeholder{
+#answer::placeholder {
   color: black;
 }
 
-#answer:focus{
+#answer:focus {
   outline: none;
 }
 
-.button{
-  width: 25%;
-  height: 80px;
-  font-size: 30px;
-  border: 1px solid black;
+/* BOTTONI */
+
+.button {
+  width: calc(25% - 8px);
+  aspect-ratio: 1 / 1;
+  height: auto;
+
+  font-size: 26px;
+  border-radius: 50%;
+  border: none;
   background-color: #333;
   color: white;
-  transition: all .3s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+
+  transition:
+    transform .08s ease,
+    box-shadow .08s ease,
+    filter .08s ease;
 }
 
-.button.clicked{
-  scale: .85
+/* hover desktop */
+
+.button:hover {
+  filter: brightness(1.08);
 }
 
-.button0,
-.button:last-of-type {
-  width: 50%;
+/* pressione */
+
+.button:active,
+.button.clicked {
+  transform: scale(.98) translateY(1px);
+
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.25),
+    inset 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* bottone 0 stile ios */
+
+.button0 {
+  width: calc(50% - 5px);
+  aspect-ratio: auto;
+  height: 70px;
+  border-radius: 40px;
+}
+
+/* = largo */
+
+.equal {
+  width: calc(50% - 5px);
+  aspect-ratio: auto;
+  height: 70px;
+  border-radius: 40px;
+}
+
+/* operatori */
+
+.button[value="+"],
+.button[value="-"],
+.button[value="*"],
+.button[value="/"],
+.button[value="="] {
+  background-color: #1e88e5;
+}
+
+/* funzioni */
+
+.button[value="C"],
+.button[value="<-"] {
+  background-color: #555;
 }
 
 @media screen and (max-width: 576px) {
-  .calculator{
-    width: 75%;
+
+  .calculator {
+    width: 90%;
   }
+
+  #answer {
+    font-size: 36px;
+  }
+
+  .button {
+    font-size: 24px;
+  }
+
 }
