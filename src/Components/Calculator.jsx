@@ -1,5 +1,5 @@
 import './Calculator.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 
 function tokenize(input) {
@@ -127,6 +127,12 @@ function Calculator() {
   const [result, setResult] = useState('');
   const [isCalculated, setIsCalculated] = useState(false);
 
+  useEffect(() => {
+    document.body.classList.toggle('full-bleed', isMobile);
+
+    return () => document.body.classList.remove('full-bleed');
+  }, []);
+
   const btnClick = (e, type) => {
     animateButton(e);
 
@@ -179,7 +185,7 @@ function Calculator() {
 
   return (
 
-    <div className={`calculator ${isMobile ? 'calculator--fullscreen' : 'd-flex flex-wrap my-5'}`}>
+    <div className="calculator d-flex flex-wrap my-5">
 
       <input
         id="answer"

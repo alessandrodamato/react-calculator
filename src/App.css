@@ -3,6 +3,10 @@ body{
   user-select: none !important;
 }
 
+body.full-bleed {
+  background: gray !important;
+}
+
 h1 {
   color: black;
 }
