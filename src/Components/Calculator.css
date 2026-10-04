@@ -132,3 +132,7 @@
   }
 
 }
+
+body.full-bleed .calculator {
+  box-shadow: none;
+}
