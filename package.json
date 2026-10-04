@@ -10,6 +10,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
     "react": "^19.3.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4"
   },
