@@ -1,6 +1,108 @@
 import './Calculator.css';
 import { useState } from "react";
 
+function tokenize(input) {
+  const tokens = [];
+
+  let index = 0;
+
+  while (index < input.length) {
+    const char = input[index];
+
+    if (char === '+' || char === '-' || char === '*' || char === '/') {
+      tokens.push({ type: 'operator', value: char });
+      index += 1;
+      continue;
+    }
+
+    if (char === '.' || (char >= '0' && char <= '9')) {
+      const start = index;
+      let dots = 0;
+
+      while (index < input.length && (input[index] === '.' || (input[index] >= '0' && input[index] <= '9'))) {
+        if (input[index] === '.') {
+          dots += 1;
+          if (dots > 1) throw new Error('Numero non valido');
+        }
+        index += 1;
+      }
+
+      const raw = input.slice(start, index);
+      if (raw === '.') throw new Error('Numero non valido');
+
+      tokens.push({ type: 'number', value: Number(raw) });
+      continue;
+    }
+
+    throw new Error('Carattere non valido');
+  }
+
+  return tokens;
+}
+
+function evaluateExpression(expression) {
+  const tokens = tokenize(expression);
+
+  if (tokens.length === 0) throw new Error('Espressione vuota');
+
+  let position = 0;
+
+  const peek = () => tokens[position];
+
+  const parseFactor = () => {
+    const token = peek();
+
+    if (!token) throw new Error('Operando mancante');
+
+    if (token.type === 'operator' && (token.value === '-' || token.value === '+')) {
+      position += 1;
+      const value = parseFactor();
+      return token.value === '-' ? -value : value;
+    }
+
+    if (token.type !== 'number') throw new Error('Operando non valido');
+
+    position += 1;
+    return token.value;
+  };
+
+  const parseTerm = () => {
+    let value = parseFactor();
+
+    while (peek()?.type === 'operator' && (peek().value === '*' || peek().value === '/')) {
+      const operator = peek().value;
+      position += 1;
+      const right = parseFactor();
+
+      if (operator === '/' && right === 0) throw new Error('Divisione per zero');
+
+      value = operator === '*' ? value * right : value / right;
+    }
+
+    return value;
+  };
+
+  const parseExpression = () => {
+    let value = parseTerm();
+
+    while (peek()?.type === 'operator' && (peek().value === '+' || peek().value === '-')) {
+      const operator = peek().value;
+      position += 1;
+      const right = parseTerm();
+      value = operator === '+' ? value + right : value - right;
+    }
+
+    return value;
+  };
+
+  const value = parseExpression();
+
+  if (position !== tokens.length) throw new Error('Espressione non valida');
+  if (!Number.isFinite(value)) throw new Error('Risultato non valido');
+
+  return value;
+}
+
 function Calculator() {
 
   const buttons = [
@@ -53,7 +155,7 @@ function Calculator() {
     if (result === '') return;
 
     try {
-      const evalResult = eval(result);
+      const evalResult = evaluateExpression(result);
       setResult(evalResult.toString());
     }
     catch {
